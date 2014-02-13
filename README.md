@@ -1,7 +1,12 @@
 cloudfoundry-service-broker
 ===========================
 
-Spring MVC framework app for V2 CloudFoundry service brokers
+Spring MVC based REST application for V2 CloudFoundry service brokers based on a suggestion by Steven Greenberg at https://github.com/cloudfoundry-community/spring-service-broker.
+
+The enhancements are:
+
+- Migration to the latest Spring Framework 4.0.1
+- Added default services
 
 # Overview
 
@@ -33,42 +38,14 @@ By default, the broker uses Spring Security to protect access to resources.  The
 
 ### Testing
 
-Integration tests are included to test the controllers.  You are responsible for testing your service implementation.  You can run the tests with gradle (`gradle test`).
+Integration tests are included to test the controllers.  You are responsible for testing your service implementation.  
 
-Endpoint tests using a RestTemplate are "coming soon."
+- Initial draft of RestTemplate endpoint tests.
 
 ### Model Notes
 
 - The model is for the REST/Controller level.  It can be extended as needed.
 - All models explicitly define serialization field names.
-
-## Mongo DB example
-
-An example implementation is included in the mongodb branch.  This implementation broker an external mongodb installation.  The mongo install could be manual, could be deployed by bosh, or other.  
-
-This example does the following:
-
-- Creates a new database for each new service instance
-- Creates a new user in the database for each service instance binding.  NOTE: Currently each user has a default pwd of "password".  Adding a password generator is a TODO.
-- Saves the service instance and binding metadata to mongo db in a default database (configured as "cfbroker")
-
-The example uses Spring Data Mongo for persistence of service instance and binding information.f  It uses the MongoClient java driver for manipulating mongo (creating dbs, users, etc).  The configuration is separated so each capability can be used separately or be split into multiple mongos.
-
-### Mongo Config
-
-The following configuration files have been added for this implementation:
-
-- src/main/webapp/WEB-INF/spring/broker-catalog.xml: Configures the "catalog" exposed by this broker used by the BeanCatalogService
-- src/main/webapp/WEB-INF/spring/mongo-client.xml: Configures the connection information for the mongo installation being manipulated by this broker.
-- src/main/webapp/WEB-INF/spring/spring-data-mongo.xml: Configures the connection information for the mongo installation used to persist the ServiceInstance and ServiceInstanceBindings
-
-### Mongo Tests
-
-The test suite includes integration tests that require a running mongo instance.  This is configured in:
-
-src/test/java/com/pivotal/cf/broker/mongodb/MongoConfiguration
-
-The tests cleanup after themselves but will not affect existing databases.
 
 ## To Do
 
@@ -77,6 +54,7 @@ The tests cleanup after themselves but will not affect existing databases.
 * Integrate w/ NATS to allow this war to be deployed with Bosh
 * Create a Bosh release
 * Separate integration project to test broker endpoints
+* Migrate to Spring Web Configuration
 
 
 
