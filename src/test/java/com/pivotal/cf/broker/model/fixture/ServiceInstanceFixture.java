@@ -1,17 +1,24 @@
+/**
+ * 
+ */
 package com.pivotal.cf.broker.model.fixture;
 
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.codehaus.jackson.JsonGenerationException;
-import org.codehaus.jackson.map.JsonMappingException;
-
+import com.fasterxml.jackson.core.JsonGenerationException;
+import com.fasterxml.jackson.databind.JsonMappingException;
 import com.pivotal.cf.broker.model.CreateServiceInstanceRequest;
 import com.pivotal.cf.broker.model.CreateServiceInstanceResponse;
 import com.pivotal.cf.broker.model.ServiceDefinition;
 import com.pivotal.cf.broker.model.ServiceInstance;
 
+/**
+ * 
+ * @author Johannes Hiemer.
+ *
+ */
 public class ServiceInstanceFixture {
 
 	public static List<ServiceInstance> getAllServiceInstances() {

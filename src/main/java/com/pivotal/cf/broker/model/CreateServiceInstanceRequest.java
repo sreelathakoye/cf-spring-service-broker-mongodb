@@ -1,36 +1,32 @@
 package com.pivotal.cf.broker.model;
 
-import org.codehaus.jackson.annotate.JsonAutoDetect;
-import org.codehaus.jackson.annotate.JsonAutoDetect.Visibility;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.codehaus.jackson.map.annotate.JsonSerialize;
-import org.hibernate.validator.constraints.NotEmpty;
+import com.fasterxml.jackson.annotation.JsonAutoDetect;
+import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 /**
  * A request sent by the cloud controller to create a new instance
  * of a service.
  * 
  * @author sgreenberg@gopivotal.com
+ * @author Johannes Hiemer.
  */
 @JsonAutoDetect(getterVisibility = Visibility.NONE)
 public class CreateServiceInstanceRequest {
 
-	@NotEmpty
 	@JsonSerialize
 	@JsonProperty("service_id")
 	private String serviceDefinitionId;
 	
-	@NotEmpty
 	@JsonSerialize
 	@JsonProperty("plan_id")
 	private String planId;
 	
-	@NotEmpty
 	@JsonSerialize
 	@JsonProperty("organization_guid")
 	private String organizationGuid;
 	
-	@NotEmpty
 	@JsonSerialize
 	@JsonProperty("space_guid")
 	private String spaceGuid;

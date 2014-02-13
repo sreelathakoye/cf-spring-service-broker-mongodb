@@ -23,12 +23,8 @@ public class CatalogController extends BaseController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(CatalogController.class);
 	
-	private CatalogService service;
-	
 	@Autowired 
-	public CatalogController(CatalogService service) {
-		this.service = service;
-	}
+	private CatalogService service;
 	
 	@RequestMapping(value = BASE_PATH, method = RequestMethod.GET)
 	public @ResponseBody Catalog getCatalog() {

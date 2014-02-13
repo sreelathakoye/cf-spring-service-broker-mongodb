@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.pivotal.cf.broker.controller;
 
 import static org.hamcrest.Matchers.containsInAnyOrder;
@@ -19,7 +22,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -31,33 +34,37 @@ import com.pivotal.cf.broker.model.fixture.ServiceInstanceFixture;
 import com.pivotal.cf.broker.service.CatalogService;
 import com.pivotal.cf.broker.service.ServiceInstanceService;
 
-
+/**
+ * 
+ * @author Johannes Hiemer.
+ *
+ */
 public class ServiceInstanceControllerIntegrationTest {
 		
-	MockMvc mockMvc;
+	private MockMvc mockMvc;
 
 	@InjectMocks
-	ServiceInstanceController controller;
+	private ServiceInstanceController controller;
 
 	@Mock
-	ServiceInstanceService serviceInstanceService;
+	private ServiceInstanceService serviceInstanceService;
 	
 	@Mock
-	CatalogService catalogService;
+	private CatalogService catalogService;
 
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 
 	    this.mockMvc = MockMvcBuilders.standaloneSetup(controller)
-	            .setMessageConverters(new MappingJacksonHttpMessageConverter()).build();
+	            .setMessageConverters(new MappingJackson2HttpMessageConverter()).build();
 	}
 	
 	@Test
 	public void serviceInstancesAreRetrievedCorrectly() throws Exception {
 	    when(serviceInstanceService.getAllServiceInstances()).thenReturn(ServiceInstanceFixture.getAllServiceInstances());
 	
-	    this.mockMvc.perform(get(ServiceInstanceController.BASE_PATH)
+	    this.mockMvc.perform(get(ServiceInstanceController.SERVICE_INSTANCE_BASE_PATH)
 	        .accept(MediaType.APPLICATION_JSON))
 	        .andExpect(status().isOk())
             .andExpect(content().contentTypeCompatibleWith(MediaType.APPLICATION_JSON))
@@ -82,7 +89,7 @@ public class ServiceInstanceControllerIntegrationTest {
 		
 	    String dashboardUrl = ServiceInstanceFixture.getCreateServiceInstanceResponse().getDashboardUrl();
 	    
-	    String url = ServiceInstanceController.BASE_PATH + "/" + instance.getId();
+	    String url = ServiceInstanceController.SERVICE_INSTANCE_BASE_PATH + "/" + instance.getId();
 	    String body = ServiceInstanceFixture.getCreateServiceInstanceRequestJson();
 	    
 	    mockMvc.perform(
@@ -103,7 +110,7 @@ public class ServiceInstanceControllerIntegrationTest {
 		when(catalogService.getServiceDefinition(any(String.class)))
     	.thenReturn(null);
 	    
-	    String url = ServiceInstanceController.BASE_PATH + "/" + instance.getId();
+	    String url = ServiceInstanceController.SERVICE_INSTANCE_BASE_PATH + "/" + instance.getId();
 	    String body = ServiceInstanceFixture.getCreateServiceInstanceRequestJson();
 	    
 	    mockMvc.perform(
@@ -126,7 +133,7 @@ public class ServiceInstanceControllerIntegrationTest {
 		when(serviceInstanceService.createServiceInstance(any(ServiceDefinition.class), any(String.class), any(String.class), any(String.class), any(String.class)))
 	    	.thenThrow(new ServiceInstanceExistsException(instance));
 	    
-	    String url = ServiceInstanceController.BASE_PATH + "/" + instance.getId();
+	    String url = ServiceInstanceController.SERVICE_INSTANCE_BASE_PATH + "/" + instance.getId();
 	    String body = ServiceInstanceFixture.getCreateServiceInstanceRequestJson();
 	    
 	    mockMvc.perform(
@@ -149,7 +156,7 @@ public class ServiceInstanceControllerIntegrationTest {
 		when(catalogService.getServiceDefinition(any(String.class)))
     	.thenReturn(ServiceFixture.getService());
 	    
-	    String url = ServiceInstanceController.BASE_PATH + "/" + instance.getId();
+	    String url = ServiceInstanceController.SERVICE_INSTANCE_BASE_PATH + "/" + instance.getId();
 	    String body = ServiceInstanceFixture.getCreateServiceInstanceRequestJson();
 	    body = body.replace("service_id", "foo");
 	    
@@ -173,7 +180,7 @@ public class ServiceInstanceControllerIntegrationTest {
 		when(catalogService.getServiceDefinition(any(String.class)))
     	.thenReturn(ServiceFixture.getService());
 	    
-	    String url = ServiceInstanceController.BASE_PATH + "/" + instance.getId();
+	    String url = ServiceInstanceController.SERVICE_INSTANCE_BASE_PATH + "/" + instance.getId();
 	    String body = "{}";
 	    
 	    mockMvc.perform(
@@ -196,7 +203,7 @@ public class ServiceInstanceControllerIntegrationTest {
 		when(serviceInstanceService.deleteServiceInstance(any(String.class)))
     		.thenReturn(instance);
 	    
-	    String url = ServiceInstanceController.BASE_PATH + "/" + instance.getId() 
+	    String url = ServiceInstanceController.SERVICE_INSTANCE_BASE_PATH + "/" + instance.getId() 
 	    		+ "?service_id=" + instance.getServiceDefinitionId()
 	    		+ "&plan_id=" + instance.getPlanId();
 	    
@@ -216,7 +223,7 @@ public class ServiceInstanceControllerIntegrationTest {
 		when(serviceInstanceService.deleteServiceInstance(any(String.class)))
     		.thenReturn(null);
 	    
-	    String url = ServiceInstanceController.BASE_PATH + "/" + instance.getId() 
+	    String url = ServiceInstanceController.SERVICE_INSTANCE_BASE_PATH + "/" + instance.getId() 
 	    		+ "?service_id=" + instance.getServiceDefinitionId()
 	    		+ "&plan_id=" + instance.getPlanId();
 	    

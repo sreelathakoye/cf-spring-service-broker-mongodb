@@ -1,4 +1,4 @@
-package com.pivotal.cf.broker.service;
+package com.pivotal.cf.broker.service.impl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.pivotal.cf.broker.model.Catalog;
 import com.pivotal.cf.broker.model.ServiceDefinition;
+import com.pivotal.cf.broker.service.CatalogService;
 
 /**
  * An implementation of the CatalogService that gets the catalog injected (ie configure 
@@ -20,6 +21,7 @@ import com.pivotal.cf.broker.model.ServiceDefinition;
 public class BeanCatalogService implements CatalogService {
 
 	private Catalog catalog;
+	
 	private Map<String,ServiceDefinition> serviceDefs = new HashMap<String,ServiceDefinition>();
 	
 	@Autowired

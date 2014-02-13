@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.pivotal.cf.broker.service.impl;
 
 import static org.junit.Assert.assertEquals;
@@ -11,8 +14,12 @@ import org.junit.Test;
 
 import com.pivotal.cf.broker.model.Catalog;
 import com.pivotal.cf.broker.model.ServiceDefinition;
-import com.pivotal.cf.broker.service.BeanCatalogService;
 
+/**
+ * 
+ * @author Johannes Hiemer.
+ *
+ */
 public class BeanCatalogServiceTest {
 
 	private BeanCatalogService service;

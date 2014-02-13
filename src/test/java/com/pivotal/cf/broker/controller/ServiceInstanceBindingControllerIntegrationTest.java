@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.pivotal.cf.broker.controller;
 
 import static org.hamcrest.Matchers.containsString;
@@ -17,7 +20,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.http.MediaType;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
@@ -29,29 +32,34 @@ import com.pivotal.cf.broker.model.fixture.ServiceInstanceFixture;
 import com.pivotal.cf.broker.service.ServiceInstanceBindingService;
 import com.pivotal.cf.broker.service.ServiceInstanceService;
 
+/**
+ * 
+ * @author Johannes Hiemer.
+ *
+ */
 public class ServiceInstanceBindingControllerIntegrationTest {
 
 	private static final String BASE_PATH = "/v2/service_instances/" 
 			+ ServiceInstanceFixture.getServiceInstance().getId()
 			+ "/service_bindings";
 	
-	MockMvc mockMvc;
+	private MockMvc mockMvc;
 
 	@InjectMocks
-	ServiceInstanceBindingController controller;
+	private ServiceInstanceBindingController controller;
 
 	@Mock
-	ServiceInstanceBindingService serviceInstanceBindingService;
+	private ServiceInstanceBindingService serviceInstanceBindingService;
 	
 	@Mock
-	ServiceInstanceService serviceInstanceService;
+	private ServiceInstanceService serviceInstanceService;
 	
 	@Before
 	public void setup() {
 		MockitoAnnotations.initMocks(this);
 
 	    this.mockMvc = MockMvcBuilders.standaloneSetup(controller)
-	            .setMessageConverters(new MappingJacksonHttpMessageConverter()).build();
+	            .setMessageConverters(new MappingJackson2HttpMessageConverter()).build();
 	}
 	
 	@Test

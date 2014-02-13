@@ -25,18 +25,17 @@ public abstract class BaseController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
 	
+	public static final String SERVICE_INSTANCE_BINDING_BASE_PATH = "/v2/service_instances/{instanceId}/service_bindings";
+	
+	public static final String SERVICE_INSTANCE_BASE_PATH = "/v2/service_instances";
+	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
-	@ResponseBody
-	public ResponseEntity<ErrorMessage> handleException(
-			HttpMessageNotReadableException ex, 
-			HttpServletResponse response) {
+	@ResponseBody public ResponseEntity<ErrorMessage> handleException(HttpMessageNotReadableException ex, HttpServletResponse response) {
 	    return getErrorResponse(ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
 	}
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
-	@ResponseBody
-	public ResponseEntity<ErrorMessage> handleException(
-			MethodArgumentNotValidException ex, 
+	@ResponseBody public ResponseEntity<ErrorMessage> handleException(MethodArgumentNotValidException ex, 
 			HttpServletResponse response) {
 	    BindingResult result = ex.getBindingResult();
 	    String message = "Missing required fields:";
@@ -47,17 +46,14 @@ public abstract class BaseController {
 	}
 	
 	@ExceptionHandler(Exception.class)
-	@ResponseBody
-	public ResponseEntity<ErrorMessage> handleException(
-			Exception ex, 
+	@ResponseBody public ResponseEntity<ErrorMessage> handleException(Exception ex, 
 			HttpServletResponse response) {
 		logger.warn("Exception", ex);
 	    return getErrorResponse(ex.getMessage(), HttpStatus.INTERNAL_SERVER_ERROR);
 	}
 	
 	public ResponseEntity<ErrorMessage> getErrorResponse(String message, HttpStatus status) {
-		return new ResponseEntity<ErrorMessage>(new ErrorMessage(message), 
-				status);
+		return new ResponseEntity<ErrorMessage>(new ErrorMessage(message), status);
 	}
 	
 }
