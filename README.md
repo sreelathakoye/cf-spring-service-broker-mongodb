@@ -22,11 +22,11 @@ The goal is to provide a boilerplate Spring MVC application that can be used to 
 To use:
 
 1. Fork the project
-2. Implement (3) interfaces in the com.pivotal.cf.broker.service package (alternatively, you can use the included BeanCatalogService and just implement the other (2) interfaces)
-3. Ensure your service impls are annotated with @Service 
-4. Build the project and run the tests: `gradle build`
-5. Push the broker to CloudFoundry as an app: `cf push <your-broker> --path build/libs/<war>`
-6. Register your service broker with CF: `cf add-service-broker <service-broker-name>`
+2. Build the project and run the tests: `mvn clean install`
+3. Push the broker to CloudFoundry as an app: `cf push <your-broker> --path target/<war>`
+4. Register your service broker with CF: `cf add-service-broker <service-broker-name>`
+5. Add the URL
+6. Get ready to use...
 
 ### Security
 
