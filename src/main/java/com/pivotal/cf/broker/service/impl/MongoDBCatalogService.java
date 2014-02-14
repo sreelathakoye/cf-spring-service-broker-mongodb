@@ -18,14 +18,14 @@ import com.pivotal.cf.broker.service.CatalogService;
  *
  */
 @Service
-public class BeanCatalogService implements CatalogService {
+public class MongoDBCatalogService implements CatalogService {
 
 	private Catalog catalog;
 	
 	private Map<String,ServiceDefinition> serviceDefs = new HashMap<String,ServiceDefinition>();
 	
 	@Autowired
-	public BeanCatalogService(Catalog catalog) {
+	public MongoDBCatalogService(Catalog catalog) {
 		this.catalog = catalog;
 		initializeMap();
 	}

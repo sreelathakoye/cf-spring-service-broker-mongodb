@@ -3,14 +3,17 @@ package com.pivotal.cf.broker.model;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.springframework.data.annotation.Id;
+
 /**
  * A binding to a service instance
  * 
  * @author sgreenberg@gopivotal.com
- *
+ * @author Johannes Hiemer.
  */
 public class ServiceInstanceBinding {
 
+	@Id
 	private String id;
 	private String serviceInstanceId;
 	private Map<String,Object> credentials = new HashMap<String,Object>();

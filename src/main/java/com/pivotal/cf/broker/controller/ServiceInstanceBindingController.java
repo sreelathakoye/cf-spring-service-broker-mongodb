@@ -2,6 +2,7 @@ package com.pivotal.cf.broker.controller;
 
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -47,7 +48,7 @@ public class ServiceInstanceBindingController extends BaseController {
 	
 	@RequestMapping(value = SERVICE_INSTANCE_BINDING_BASE_PATH + "/{bindingId}", method = RequestMethod.PUT)
 	public ResponseEntity<ServiceInstanceBindingResponse> bindServiceInstance(@PathVariable("instanceId") String instanceId, 
-			@PathVariable("bindingId") String bindingId, @RequestBody ServiceInstanceBindingRequest request) throws
+			@PathVariable("bindingId") String bindingId, @Valid @RequestBody ServiceInstanceBindingRequest request) throws
 			ServiceInstanceDoesNotExistException, ServiceInstanceBindingExistsException, ServiceBrokerException {
 		
 		logger.debug( "PUT: " + SERVICE_INSTANCE_BINDING_BASE_PATH + "/{bindingId}"

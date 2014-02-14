@@ -1,3 +1,6 @@
+/**
+ * 
+ */
 package com.pivotal.cf.broker.model.fixture;
 
 import java.util.ArrayList;
@@ -5,6 +8,11 @@ import java.util.List;
 
 import com.pivotal.cf.broker.model.Plan;
 
+/**
+ * 
+ * @author Johannes Hiemer.
+ *
+ */
 public class PlanFixture {
 
 	public static List<Plan> getAllPlans() {

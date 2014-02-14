@@ -4,10 +4,10 @@
 
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.pivotal.cf.broker</groupId>
-	<artifactId>spring-service-broker-template</artifactId>
+	<artifactId>spring-service-broker-mongodb</artifactId>
 	<version>0.0.2-SNAPSHOT</version>
 	<packaging>war</packaging>
-	<name>ssbt</name>
+	<name>ssb-mongodb</name>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -15,6 +15,10 @@
 
 		<org.springframework>4.0.1.RELEASE</org.springframework>
 		<org.springframework.security>3.2.0.RELEASE</org.springframework.security>
+		<org.springframework.mongodb>1.4.0.M1</org.springframework.mongodb>
+
+		<org.hibernate.validator>5.0.2.Final</org.hibernate.validator>
+		<org.javax.validation>1.1.0.Final</org.javax.validation>
 
 		<org.slf4j>1.6.6</org.slf4j>
 		<org.logback>1.0.7</org.logback>
@@ -59,6 +63,27 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-config</artifactId>
 			<version>${org.springframework.security}</version>
+		</dependency>
+
+		<!-- Spring Data MongoDB -->
+		<dependency>
+			<groupId>org.springframework.data</groupId>
+			<artifactId>spring-data-mongodb</artifactId>
+			<version>${org.springframework.mongodb}</version>
+		</dependency>
+
+		<!-- Hibernate 5 Validator -->
+		<dependency>
+			<groupId>org.hibernate</groupId>
+			<artifactId>hibernate-validator</artifactId>
+			<version>${org.hibernate.validator}</version>
+		</dependency>
+
+		<!-- Java Validation JSR 303 -->
+		<dependency>
+			<groupId>javax.validation</groupId>
+			<artifactId>validation-api</artifactId>
+			<version>${org.javax.validation}</version>
 		</dependency>
 
 		<!-- Servlet API -->
@@ -160,5 +185,21 @@
 			</plugin>
 		</plugins>
 	</build>
+
+	<repositories>
+		<repository>
+			<id>Maven Central</id>
+			<name>Central Maven Repository</name>
+			<url>http://repo1.maven.org/maven2/</url>
+			<snapshots>
+				<enabled>false</enabled>
+			</snapshots>
+		</repository>
+		<repository>
+			<id>spring-snapshot</id>
+			<name>Spring Maven SNAPSHOT Repository</name>
+			<url>http://repo.springsource.org/libs-snapshot</url>
+		</repository>
+	</repositories>
 
 </project>

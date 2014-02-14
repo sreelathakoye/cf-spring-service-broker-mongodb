@@ -1,5 +1,7 @@
 package com.pivotal.cf.broker.model;
 
+import org.springframework.data.annotation.Id;
+
 import com.fasterxml.jackson.annotation.JsonAutoDetect;
 import com.fasterxml.jackson.annotation.JsonAutoDetect.Visibility;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -16,6 +18,7 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 @JsonAutoDetect(getterVisibility = Visibility.NONE)
 public class ServiceInstance {
 
+	@Id
 	@JsonSerialize
 	@JsonProperty("service_instance_id")
 	private String id;

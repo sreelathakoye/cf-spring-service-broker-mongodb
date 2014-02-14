@@ -22,7 +22,7 @@ import com.pivotal.cf.broker.model.ServiceDefinition;
  */
 public class BeanCatalogServiceTest {
 
-	private BeanCatalogService service;
+	private MongoDBCatalogService service;
 	
 	private Catalog catalog;
 	private ServiceDefinition serviceDefinition;
@@ -34,7 +34,7 @@ public class BeanCatalogServiceTest {
 		List<ServiceDefinition> defs = new ArrayList<ServiceDefinition>();
 		defs.add(serviceDefinition);
 		catalog = new Catalog(defs);	
-		service = new BeanCatalogService(catalog);
+		service = new MongoDBCatalogService(catalog);
 	}
 	
 	@Test

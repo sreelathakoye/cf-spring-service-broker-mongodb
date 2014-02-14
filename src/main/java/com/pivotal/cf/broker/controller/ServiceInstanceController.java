@@ -3,6 +3,7 @@ package com.pivotal.cf.broker.controller;
 import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
+import javax.validation.Valid;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -54,7 +55,7 @@ public class ServiceInstanceController extends BaseController {
 		
 	@RequestMapping(value = SERVICE_INSTANCE_BASE_PATH + "/{instanceId}", method = RequestMethod.PUT)
 	public ResponseEntity<CreateServiceInstanceResponse> createServiceInstance(@PathVariable("instanceId") String serviceInstanceId,  
-			@RequestBody CreateServiceInstanceRequest request) throws
+			@Valid @RequestBody CreateServiceInstanceRequest request) throws
 			ServiceDefinitionDoesNotExistException, ServiceInstanceExistsException, ServiceBrokerException {
 		
 		logger.debug("PUT: " + SERVICE_INSTANCE_BASE_PATH + "/{instanceId}" 
