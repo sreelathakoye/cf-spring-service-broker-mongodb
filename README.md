@@ -26,7 +26,7 @@ An sample implementation for Openstack is currently planned, but not yet done, d
 To use:
 
 1. Fork the project
-2. Configure your MongoDB instance in src/main/resources/application-mongodb.properties
+2. Configure your MongoDB instance in `src/main/resources/application-mongodb.properties`
 3. Build the project and run the tests: `mvn clean install`
 4 Push the broker to CloudFoundry as an app: `cf push <your-broker> --path target/<war>`
 5. Register your service broker with CF: `cf add-service-broker <service-broker-name>`
@@ -37,7 +37,7 @@ To use:
 
 When you register your broker with the cloud controller, you are prompted to enter a username and password.  This is used by the broker to verify requests.
 
-By default, the broker uses Spring Security to protect access to resources. The username and password are stored in: /src/main/java/com/pivotal/cf/config/security/CustomSecurityConfiguration". The password is not yet encrypted or stored in a database. For large infrastructure I recommend the usage of a Spring Security LDAP binding or other SSO implementations. If you have questions regarding that, feel free to contact me.
+By default, the broker uses Spring Security to protect access to resources. The username and password are stored in: `/src/main/java/com/pivotal/cf/config/security/CustomSecurityConfiguration`. The password is not yet encrypted or stored in a database. For large infrastructure I recommend the usage of a Spring Security LDAP binding or other SSO implementations. If you have questions regarding that, feel free to contact me.
 
 ### Testing
 
