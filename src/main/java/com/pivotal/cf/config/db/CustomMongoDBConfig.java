@@ -1,6 +1,9 @@
 package com.pivotal.cf.config.db;
 
+import java.net.UnknownHostException;
+
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.data.authentication.UserCredentials;
@@ -8,6 +11,7 @@ import org.springframework.data.mongodb.config.AbstractMongoConfiguration;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 import com.mongodb.Mongo;
+import com.mongodb.MongoClient;
 
 /**
  * 
@@ -17,7 +21,7 @@ import com.mongodb.Mongo;
 @Configuration
 @Import(CustomPropertiesResolver.class)
 @EnableMongoRepositories(value = "com.pivotal.cf.broker.mongodb.repositories")
-public class CustomMongoDBRepositoryConfig extends AbstractMongoConfiguration {
+public class CustomMongoDBConfig extends AbstractMongoConfiguration {
 
 	@Value("${database.nosql.host}")
 	private String databaseHost;
@@ -53,6 +57,11 @@ public class CustomMongoDBRepositoryConfig extends AbstractMongoConfiguration {
 	@SuppressWarnings("deprecation")
 	public Mongo mongo() throws Exception {
 		return new Mongo(databaseHost, databasePort);
+	}
+	
+	@Bean
+	public MongoClient mongoClient() throws UnknownHostException {
+		return new MongoClient();
 	}
 	
 }

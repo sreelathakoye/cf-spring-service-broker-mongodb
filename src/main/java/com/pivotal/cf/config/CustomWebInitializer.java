@@ -9,7 +9,7 @@ import javax.servlet.ServletRegistration.Dynamic;
 import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
-import com.pivotal.cf.config.db.CustomMongoDBRepositoryConfig;
+import com.pivotal.cf.config.db.CustomMongoDBConfig;
 import com.pivotal.cf.config.security.CustomSecurityConfiguration;
 import com.pivotal.cf.config.web.CustomMvcConfiguration;
 import com.pivotal.cf.config.web.cors.CORSFilter;
@@ -23,12 +23,12 @@ public class CustomWebInitializer extends AbstractAnnotationConfigDispatcherServ
 	
 	@Override
 	protected Class<?>[] getRootConfigClasses() {
-		return new Class<?>[] { CustomSecurityConfiguration.class };
+		return new Class<?>[] { CustomSecurityConfiguration.class, CustomMongoDBConfig.class };
 	}
 
 	@Override
 	protected Class<?>[] getServletConfigClasses() {
-		return new Class<?>[] { CustomMvcConfiguration.class, CustomMongoDBRepositoryConfig.class };
+		return new Class<?>[] { CustomMvcConfiguration.class };
 	}
 
 	@Override
