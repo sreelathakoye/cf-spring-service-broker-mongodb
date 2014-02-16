@@ -37,9 +37,12 @@ import com.pivotal.cf.broker.service.ServiceInstanceService;
  * @author Johannes Hiemer.
  */
 @Controller
+@RequestMapping(value = "/v2")
 public class ServiceInstanceController extends BaseController {
 
 	private static final Logger logger = LoggerFactory.getLogger(ServiceInstanceController.class);
+	
+	public static final String SERVICE_INSTANCE_BASE_PATH = "/v2/service_instances";
 	
 	@Autowired
 	private ServiceInstanceService service;
@@ -47,13 +50,13 @@ public class ServiceInstanceController extends BaseController {
 	@Autowired
 	private CatalogService catalogService;
 	
-	@RequestMapping(value = SERVICE_INSTANCE_BASE_PATH, method = RequestMethod.GET)
+	@RequestMapping(value = "/service_instances", method = RequestMethod.GET)
 	public @ResponseBody List<ServiceInstance> getServiceInstances() {
 		logger.debug("GET: " + SERVICE_INSTANCE_BASE_PATH + ", getServiceInstances()");
 		return service.getAllServiceInstances();
 	}
 		
-	@RequestMapping(value = SERVICE_INSTANCE_BASE_PATH + "/{instanceId}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/service_instances/{instanceId}", method = RequestMethod.PUT)
 	public ResponseEntity<CreateServiceInstanceResponse> createServiceInstance(@PathVariable("instanceId") String serviceInstanceId,  
 			@Valid @RequestBody CreateServiceInstanceRequest request) throws
 			ServiceDefinitionDoesNotExistException, ServiceInstanceExistsException, ServiceBrokerException {
@@ -78,7 +81,7 @@ public class ServiceInstanceController extends BaseController {
         		HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = SERVICE_INSTANCE_BASE_PATH + "/{instanceId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/service_instances/{instanceId}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> deleteServiceInstance(@PathVariable("instanceId") String instanceId, 
 			@RequestParam("service_id") String serviceId, @RequestParam("plan_id") String planId) throws ServiceBrokerException {
 		

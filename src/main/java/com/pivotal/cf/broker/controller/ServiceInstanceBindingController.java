@@ -36,9 +36,12 @@ import com.pivotal.cf.broker.service.ServiceInstanceService;
  * @author Johannes Hiemer.
  */
 @Controller
+@RequestMapping(value = "/v2/service_instances")
 public class ServiceInstanceBindingController extends BaseController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(ServiceInstanceBindingController.class);
+	
+	public static final String SERVICE_INSTANCE_BINDING_BASE_PATH = "/v2/service_instances/{instanceId}/service_bindings";
 	
 	@Autowired
 	private ServiceInstanceBindingService serviceInstanceBindingService;
@@ -46,7 +49,7 @@ public class ServiceInstanceBindingController extends BaseController {
 	@Autowired
 	private ServiceInstanceService serviceInstanceService;
 	
-	@RequestMapping(value = SERVICE_INSTANCE_BINDING_BASE_PATH + "/{bindingId}", method = RequestMethod.PUT)
+	@RequestMapping(value = "/{instanceId}/service_bindings/{bindingId}", method = RequestMethod.PUT)
 	public ResponseEntity<ServiceInstanceBindingResponse> bindServiceInstance(@PathVariable("instanceId") String instanceId, 
 			@PathVariable("bindingId") String bindingId, @Valid @RequestBody ServiceInstanceBindingRequest request) throws
 			ServiceInstanceDoesNotExistException, ServiceInstanceBindingExistsException, ServiceBrokerException {
@@ -70,7 +73,7 @@ public class ServiceInstanceBindingController extends BaseController {
         		HttpStatus.CREATED);
 	}
 	
-	@RequestMapping(value = SERVICE_INSTANCE_BINDING_BASE_PATH + "/{bindingId}", method = RequestMethod.DELETE)
+	@RequestMapping(value = "/{instanceId}/service_bindings/{bindingId}", method = RequestMethod.DELETE)
 	public ResponseEntity<String> deleteServiceInstanceBinding(@PathVariable("instanceId") String instanceId, 
 			@PathVariable("bindingId") String bindingId, @RequestParam("service_id") String serviceId,
 			@RequestParam("plan_id") String planId) throws ServiceBrokerException {

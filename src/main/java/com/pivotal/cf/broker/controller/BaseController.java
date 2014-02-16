@@ -25,10 +25,6 @@ public abstract class BaseController {
 
 	private static final Logger logger = LoggerFactory.getLogger(BaseController.class);
 	
-	public static final String SERVICE_INSTANCE_BINDING_BASE_PATH = "/v2/service_instances/{instanceId}/service_bindings";
-	
-	public static final String SERVICE_INSTANCE_BASE_PATH = "/v2/service_instances";
-	
 	@ExceptionHandler(HttpMessageNotReadableException.class)
 	@ResponseBody public ResponseEntity<ErrorMessage> handleException(HttpMessageNotReadableException ex, HttpServletResponse response) {
 	    return getErrorResponse(ex.getMessage(), HttpStatus.UNPROCESSABLE_ENTITY);
