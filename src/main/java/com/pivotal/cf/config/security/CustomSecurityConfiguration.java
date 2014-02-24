@@ -43,6 +43,8 @@ public class CustomSecurityConfiguration extends WebSecurityConfigurerAdapter  {
         	.antMatchers("/**").hasRole("USER")
         	.anyRequest().authenticated()
         .and()
-        	.httpBasic();
+        	.httpBasic()
+        .and()
+        	.csrf().disable();
     }
 }
